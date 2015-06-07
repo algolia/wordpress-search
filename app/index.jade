@@ -46,12 +46,22 @@ html(lang="en" ng-app="myApp")
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
       .input-group
-        input.form-control(type="search" ng-model="q" placeholder="Search by name, description & tags..." ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 50, 'blur': 0 } }" ng-keyup="$event.keyCode == 13 && submit()")
+        input.form-control(type="search" ng-model="q" placeholder="Search by name, description & tags..." ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 50, 'blur': 0 } }" ng-keyup="$event.keyCode == 13 && submit()" autofocus)
         span.input-group-addon
           i.fa.fa-search
 
-    .container.search-results(ng-cloak)
+    .container.search-results(ng-cloak ng-if="content")
       .row.plugins(ng-class="{ blur: blurred }")
+
+        .col-md-10.col-md-offset-2.col-sm-8.col-sm-offset-4(ng-if="content.nbHits !== 0")
+          .stats
+            | Found <strong>{{ content.nbHits | number }}</strong> plugin<span ng-if="content.nbHits !== 1">s</span> in <strong>{{ content.processingTimeMS }}</strong>ms,
+            |  by
+            a(href="https://www.algolia.com" target="_blank")
+              img(src="images/logo-algolia.png")
+
+        .col-lg-12.no-results(ng-if="content.nbHits === 0")
+          | No results are matching "<strong>{{ q }}</strong>".
 
         .col-md-2.col-sm-4.facets.hidden-xs
           .facet(ng-repeat="facet in content.facets")
