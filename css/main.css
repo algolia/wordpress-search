@@ -7663,6 +7663,9 @@ header {
     .plugins .plugin-card .plugin-card-top {
       border: 1px solid #dedede;
       padding: 1.5em; }
+      .plugins .plugin-card .plugin-card-top .plugin-logo {
+        width: 128px;
+        height: 128px; }
     .plugins .plugin-card .plugin-card-bottom {
       padding: 1.5em;
       border: 1px solid #dedede;
