@@ -5,7 +5,7 @@ var algoliasearchHelper = require('algoliasearch-helper');
 var SearchCtrl = function($scope, $sce, $timeout, algolia) {
   $scope.client = algolia.Client('latency', 'f394cda609ddd0db79743b7c5182af09');
   $scope.helper = algoliasearchHelper($scope.client, 'wordpress_plugins', {
-    facets: ['author', 'tags']
+    facets: ['tags', 'author']
   });
   $scope.q = '';
 
