@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     jade = require('gulp-jade'),
     bower = require('gulp-bower'),
     notify = require('gulp-notify'),
-    ghPages = require('gulp-gh-pages');
+    ghPages = require('gulp-gh-pages'),
+    file = require('gulp-file');
 
 // Modules for webserver and livereload
 var express = require('express'),
@@ -136,6 +137,7 @@ gulp.task('open-browser', ['watch'], function(){
 
 gulp.task('deploy', ['build'], function() {
   return gulp.src('./dist/**/*')
+    .pipe(file('CNAME', 'wordpress.algolia.com'))
     .pipe(ghPages());
 });
 

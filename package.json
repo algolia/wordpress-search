@@ -14,6 +14,7 @@
     "gulp-clean": "~0.3.1",
     "gulp-concat": "~2.5.2",
     "gulp-embedlr": "~0.5.2",
+    "gulp-file": "^0.2.0",
     "gulp-gh-pages": "^0.5.2",
     "gulp-jade": "^1.0.1",
     "gulp-jshint": "~1.11.0",
