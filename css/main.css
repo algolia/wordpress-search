@@ -7670,12 +7670,21 @@ header {
       background: #fafafa; }
   .plugins .facets .facet-value {
     display: block;
-    border-bottom: 1px dotted #ccc; }
+    border-bottom: 1px dotted #ccc;
+    padding: 3px 3px; }
   .plugins .facets .facet-count {
     display: block;
     float: right;
     color: #ccc;
     font-size: 0.8em;
-    margin-top: 0.3em; }
+    line-height: 1.7em; }
   .plugins .facets li.refined .facet-value {
-    font-weight: 600; }
+    background: #fafafa;
+    border: 1px solid #dedede;
+    padding: 3px 2px; }
+  .plugins .facets li.refined .facet-count {
+    background: #eee;
+    color: #666;
+    border: 1px solid #dedede;
+    margin: 0;
+    padding: 3px 5px; }

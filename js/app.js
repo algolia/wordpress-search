@@ -7,7 +7,7 @@ var algoliasearchHelper = require('algoliasearch-helper');
 var SearchCtrl = function($scope, $sce, $timeout, algolia) {
   $scope.client = algolia.Client('latency', 'f394cda609ddd0db79743b7c5182af09');
   $scope.helper = algoliasearchHelper($scope.client, 'wordpress_plugins', {
-    facets: ['author', 'tags']
+    facets: ['tags', 'author']
   });
   $scope.q = '';
 
@@ -76,7 +76,7 @@ app.controller('SearchCtrl', ['$scope', '$sce', '$timeout', 'algolia', SearchCtr
 app.filter('facetTitle', facet.titleFilter);
 app.filter('facetValue', facet.valueFilter);
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_84e6f5e7.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_88534235.js","/")
 },{"./controllers/SearchCtrl":1,"./filters/facet":3,"algoliasearch/src/browser/builds/algoliasearch.angular":92,"angular":101,"angular-sanitize":99,"buffer":102,"oMfpAn":107}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";
