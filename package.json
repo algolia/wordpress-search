@@ -1,0 +1,30 @@
+{
+  "name": "wordpress-plugins-search",
+  "version": "0.0.1",
+  "devDependencies": {
+    "algoliasearch-helper": "~2.0.4",
+    "angular": "~1.4.0",
+    "angular-sanitize": "^1.4.0",
+    "browserify": "~10.2.3",
+    "connect-livereload": "~0.5.3",
+    "express": "~4.12.4",
+    "gulp": "~3.9.0",
+    "gulp-autoprefixer": "2.3.0",
+    "gulp-browserify": "~0.5.1",
+    "gulp-clean": "~0.3.1",
+    "gulp-concat": "~2.5.2",
+    "gulp-embedlr": "~0.5.2",
+    "gulp-gh-pages": "^0.5.2",
+    "gulp-jade": "^1.0.1",
+    "gulp-jshint": "~1.11.0",
+    "gulp-livereload": "~3.8.0",
+    "gulp-rimraf": "~0.1.1",
+    "gulp-sass": "~2.0.1",
+    "gulp-util": "~3.0.5",
+    "open": "0.0.5",
+    "tiny-lr": "0.1.5"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

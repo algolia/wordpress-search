@@ -1,0 +1,86 @@
+html(lang="en" ng-app="myApp")
+  head
+    meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
+    title Wordpress Plugins Search
+
+    link(href="css/main.css" rel="stylesheet")
+
+    meta(name="twitter:card" content="summary")
+    meta(name="twitter:site" content="@algolia")
+    meta(name="twitter:title" content="")
+    meta(name="twitter:description" content="")
+    meta(name="twitter:image:src" content="")
+
+    meta(property="st:title" content="")
+    meta(property="og:site_name" content="")
+    meta(property="og:title" content="")
+    meta(property="og:description" content="")
+    meta(property="og:image" content="")
+    meta(property="og:image:width" content=600)
+    meta(property="og:image:height" content=315)
+
+  body(ng-controller="SearchCtrl")
+    header
+      a.logo.hidden-xs(href="https://www.algolia.com" taget="_blank")
+        img(src="images/logo-algolia.png")
+      a.hidden-zs.btn.btn-primary.btn-try(href="https://www.algolia.com/with/wordpress" taget="_blank")
+        i.fa.fa-lightbulb-o
+        |  Add Algolia Search to Wordpress #{''}
+        i.fa.fa-arrow-circle-o-right
+
+      h1 Wordpress Plugins Search
+      h3 A Unique Search Experience propulsed by Algolia
+
+      .github-badges.hidden-xs.hidden-sm
+        span.share-twitter
+          <a href="https://twitter.com/share" class="twitter-share-button" data-via="aloglia">Tweet</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        span.follow-twitter
+          <a href="https://twitter.com/algolia" class="twitter-follow-button" data-show-count="false">Follow @algolia</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+      .input-group
+        input.form-control(type="search" ng-model="q" placeholder="Search by name, description & tags..." ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 50, 'blur': 0 } }" ng-keyup="$event.keyCode == 13 && submit()")
+        span.input-group-addon
+          i.fa.fa-search
+
+    .container.search-results
+      .row.plugins(ng-class="{ blur: blurred }")
+
+        .col-md-2.col-sm-4.facets.hidden-xs
+          .facet(ng-repeat="facet in content.facets")
+            h3 {{ facet.name | facetTitle }}
+            ul.list-unstyled
+              li(ng-repeat="(value, count) in facet.data" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
+                span.facet-count {{ count | number }}
+                a.facet-value(href="#" ng-click="toggleRefine($event, facet.name, value)") {{ value | facetValue : facet.name }}
+
+        .col-md-5.col-sm-8(ng-repeat="odd in [true, false]" ng-class="{ 'hidden-xs hidden-sm' : !odd }")
+          .plugin-card(ng-repeat="hit in content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd) }")
+            .media.plugin-card-top
+              .media-left.plugin-icon
+                a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
+                  img.media-object(src="//ps.w.org/{{ hit.slug }}/assets/icon-128x128.png")
+              .media-body
+                h4.plugin-name
+                  a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
+                    span(ng-bind-html="hit._highlightResult.name.value")
+                p.plugin-desccription(ng-bind-html="hit._highlightResult.short_description.value")
+            .plugin-card-bottom
+              .plugin-author
+                strong Author: #{''}
+                span(ng-bind-html="hit._highlightResult.author.value")
+              .plugin-ratings
+                strong Rated:
+                |  {{ hit.num_ratings | number }}
+              .plugin-updated
+                strong Last Updated:
+                |  {{  hit.last_updated | date }}
+              .plugin-downloaded
+                strong Downloaded:
+                |  {{ hit.downloaded | number }}
+              .plugin-tested
+                strong Tested up to:
+                |  {{ hit.tested }}
+
+    script(src="/js/app.js")
