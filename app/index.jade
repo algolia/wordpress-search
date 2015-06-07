@@ -1,24 +1,29 @@
+- title = "Search Wordpress Plugins"
+- description = "All 38,000+ Wordpress Plugins a few keystrokes away. Try our unique search experience!"
 html(lang="en" ng-app="myApp")
   head
     meta(content="text/html; charset=UTF-8" http-equiv="Content-Type")
-    title Wordpress Plugins Search
+    meta(content=description name="description")
+    title
+      = title
+      | | by Algolia
 
     link(href="css/main.css" rel="stylesheet")
     link(href="images/favicon.ico" rel="icon")
 
     meta(name="twitter:card" content="summary")
     meta(name="twitter:site" content="@algolia")
-    meta(name="twitter:title" content="")
-    meta(name="twitter:description" content="")
-    meta(name="twitter:image:src" content="")
+    meta(name="twitter:title" content=title)
+    meta(name="twitter:description" content=description)
+    meta(name="twitter:image:src" content="images/share-twitter.png")
 
-    meta(property="st:title" content="")
-    meta(property="og:site_name" content="")
-    meta(property="og:title" content="")
-    meta(property="og:description" content="")
-    meta(property="og:image" content="")
+    meta(property="st:title" content=title)
+    meta(property="og:site_name" content=title)
+    meta(property="og:title" content=title)
+    meta(property="og:description" content=description)
+    meta(property="og:image" content="images/share-facebook.png")
     meta(property="og:image:width" content=600)
-    meta(property="og:image:height" content=315)
+    meta(property="og:image:height" content=285)
 
   body(ng-controller="SearchCtrl")
     header
@@ -29,7 +34,7 @@ html(lang="en" ng-app="myApp")
         |  Add Algolia Search to Wordpress #{''}
         i.fa.fa-arrow-circle-o-right
 
-      h1 Wordpress Plugins Search
+      h1= title
       h3 A Unique Search Experience propulsed by Algolia
 
       .github-badges.hidden-xs.hidden-sm
