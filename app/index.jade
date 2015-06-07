@@ -44,7 +44,7 @@ html(lang="en" ng-app="myApp")
         span.input-group-addon
           i.fa.fa-search
 
-    .container.search-results
+    .container.search-results(ng-cloak)
       .row.plugins(ng-class="{ blur: blurred }")
 
         .col-md-2.col-sm-4.facets.hidden-xs

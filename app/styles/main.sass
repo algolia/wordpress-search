@@ -24,8 +24,11 @@ $border-radius-base: 0
 
 .form-control:focus
   border-color: $input-border
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  -webkit-box-shadow: none
+  box-shadow: none
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
+  display: none !important
 
 em
   font-weight: $font-weight-bold
