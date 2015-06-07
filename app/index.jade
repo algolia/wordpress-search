@@ -76,7 +76,7 @@ html(lang="en" ng-app="myApp")
             .media.plugin-card-top
               .media-left.plugin-icon
                 a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
-                  img.media-object(src="//ps.w.org/{{ hit.slug }}/assets/icon-128x128.png")
+                  .plugin-logo.media-object(style="background: #efefef url(//ps.w.org/{{ hit.slug }}/assets/icon-128x128.png) top left no-repeat")
               .media-body
                 h4.plugin-name
                   a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
