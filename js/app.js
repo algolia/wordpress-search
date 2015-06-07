@@ -76,7 +76,7 @@ app.controller('SearchCtrl', ['$scope', '$sce', '$timeout', 'algolia', SearchCtr
 app.filter('facetTitle', facet.titleFilter);
 app.filter('facetValue', facet.valueFilter);
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_c96283b9.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_342c85e2.js","/")
 },{"./controllers/SearchCtrl":1,"./filters/facet":3,"algoliasearch/src/browser/builds/algoliasearch.angular":92,"angular":101,"angular-sanitize":99,"buffer":102,"oMfpAn":107}],3:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";
