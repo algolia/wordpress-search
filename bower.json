@@ -1,7 +1,0 @@
-{
-  "name": "wordpress-plugins",
-  "dependencies": {
-    "bootstrap-sass-official": "~3.3.0",
-    "fontawesome": "~4.3.0"
-  }
-}
