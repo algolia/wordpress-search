@@ -7688,3 +7688,18 @@ header {
     border: 1px solid #dedede;
     margin: 0;
     padding: 3px 5px; }
+  .plugins .stats {
+    text-align: right;
+    margin-bottom: 0.5em; }
+    .plugins .stats a {
+      display: inline-block;
+      background: #23282d;
+      padding: 2px 3px;
+      margin-left: 0.5em; }
+      .plugins .stats a img {
+        height: 1em; }
+  .plugins .no-results {
+    text-align: center;
+    font-size: 3em;
+    color: #666;
+    padding-top: 1em; }
