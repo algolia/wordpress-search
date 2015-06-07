@@ -7608,6 +7608,9 @@ button.close {
   border-color: #ccc;
   box-shadow: none; }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
 em {
   font-weight: 600;
   font-style: normal; }
