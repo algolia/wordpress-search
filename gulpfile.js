@@ -32,7 +32,7 @@ server.all('/*', function(req, res) {
 });
 
 // Dev task
-gulp.task('dev', ['bower', 'icons', 'templates', 'images', 'styles', 'lint', 'browserify'], function() { });
+gulp.task('build', ['bower', 'icons', 'templates', 'images', 'styles', 'lint', 'browserify'], function() { });
 
 // JSHint task
 gulp.task('lint', function() {
@@ -134,9 +134,9 @@ gulp.task('open-browser', ['watch'], function(){
   open('http://0.0.0.0:4000');
 });
 
-gulp.task('deploy', function() {
+gulp.task('deploy', ['build'], function() {
   return gulp.src('./dist/**/*')
     .pipe(ghPages());
 });
 
-gulp.task('default', ['dev', 'watch', 'open-browser']);
+gulp.task('default', ['build', 'watch', 'open-browser']);
