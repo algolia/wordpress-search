@@ -5,6 +5,14 @@ require 'algoliasearch'
 require 'open-uri'
 require 'tempfile'
 
+Algolia.init application_id: ENV['APPLICATION_ID'], api_key: ENV['API_KEY']
+index = Algolia::Index.new("#{ENV['INDEX_PREFIX']}_plugins_tmp")
+index.set_setting({
+  attributesToIndex: ['unordered(tags)', 'unordered(name)', 'author', 'unordered(short_description)', 'unordered(sections.description)'],
+  customRanking: ['desc(downloaded)'],
+  attributesForFaceting: ['author', 'tags']
+})
+
 # download list of plugins
 urls = Tempfile.new('urls')
 File.open(urls.path, 'w') do |f|
@@ -12,33 +20,30 @@ File.open(urls.path, 'w') do |f|
   f << content.scan(/<li><a href="([^"]+)\/">/).map { |name| "https://api.wordpress.org/plugins/info/1.0/#{name[0]}.json" }.join("\n")
 end
 
-# download all plugins using an advanced ruby threading mechanism :)
-infos = []
 Dir.mktmpdir('jsons') do |temp_dir|
+  # download all plugins using an advanced ruby threading mechanism :)
   `cd #{temp_dir} && (cat #{urls.path} | xargs -P 16 wget --quiet)`
 
-  infos << Dir["#{temp_dir}/*.json"].map { |f| JSON.parse(File.read(f)) rescue nil }.compact
-end
+  # collect infos + push by slice of 1000
+  Dir["#{temp_dir}/*.json"].each_slice(1000) do |paths|
+    # parse JSON
+    infos = paths.map { |f| JSON.parse(File.read(f)) rescue nil }.compact
 
-# cleanup
-objects = infos.map do |info|
-  begin
-    info['author'] = info['author'].gsub(/<[^>]+>/, '') rescue nil
-    info['tags'] = info['tags'].values rescue []
-    info.delete('compatibility')
-    info
-  rescue
-    nil
+    # cleanup
+    objects = infos.map do |info|
+      begin
+        info['author'] = info['author'].gsub(/<[^>]+>/, '') rescue nil
+        info['tags'] = info['tags'].values rescue []
+        info.delete('compatibility')
+        info
+      rescue
+        nil
+      end
+    end.compact
+
+    # push
+    index.add_objects(objects)
   end
-end.compact
 
-# push
-Algolia.init application_id: ENV['APPLICATION_ID'], api_key: ENV['API_KEY']
-index = Algolia::Index.new("#{ENV['INDEX_PREFIX']}_plugins")
-index.clear
-index.set_setting({
-  attributesToIndex: ['unordered(tags)', 'unordered(name)', 'author', 'unordered(short_description)', 'unordered(sections.description)'],
-  customRanking: ['desc(downloaded)'],
-  attributesForFaceting: ['author', 'tags']
-})
-index.add_objects(objects)
+  Algolia.move_index index.name, "#{ENV['INDEX_PREFIX']}_plugins"
+end
