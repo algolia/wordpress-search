@@ -5,13 +5,17 @@ require 'algoliasearch'
 require 'open-uri'
 require 'tempfile'
 
+puts "Initializing..."
+
 Algolia.init application_id: ENV['APPLICATION_ID'], api_key: ENV['API_KEY']
 index = Algolia::Index.new("#{ENV['INDEX_PREFIX']}_plugins_tmp")
-index.set_setting({
+index.set_settings({
   attributesToIndex: ['unordered(tags)', 'unordered(name)', 'author', 'unordered(short_description)', 'unordered(sections.description)'],
   customRanking: ['desc(downloaded)'],
   attributesForFaceting: ['author', 'tags']
 })
+
+puts "Listing..."
 
 # download list of plugins
 urls = Tempfile.new('urls')
@@ -21,8 +25,12 @@ File.open(urls.path, 'w') do |f|
 end
 
 Dir.mktmpdir('jsons') do |temp_dir|
+  puts "Crawling..."
+
   # download all plugins using an advanced ruby threading mechanism :)
   `cd #{temp_dir} && (cat #{urls.path} | xargs -P 16 wget --quiet)`
+
+  puts "Pushing..."
 
   # collect infos + push by slice of 1000
   Dir["#{temp_dir}/*.json"].each_slice(1000) do |paths|
@@ -47,3 +55,5 @@ Dir.mktmpdir('jsons') do |temp_dir|
 
   Algolia.move_index index.name, "#{ENV['INDEX_PREFIX']}_plugins"
 end
+
+puts "Done"
