@@ -30,8 +30,6 @@ Dir.mktmpdir('jsons') do |temp_dir|
   # download all plugins using an advanced ruby threading mechanism :)
   `cd #{temp_dir} && (cat #{urls.path} | xargs -P 16 wget --quiet)`
 
-  puts "Pushing..."
-
   # collect infos + push by slice of 1000
   Dir["#{temp_dir}/*.json"].each_slice(1000) do |paths|
     # parse JSON
@@ -50,6 +48,7 @@ Dir.mktmpdir('jsons') do |temp_dir|
     end.compact
 
     # push
+    puts "Pushing #{objects.size} objects..."
     index.add_objects(objects)
   end
 
