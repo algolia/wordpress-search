@@ -139,7 +139,7 @@ app.filter('facetValue', facet.valueFilter);
 
 app.directive('scrolled', ['$window', '$document', scrolled]);
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_5ff48cdf.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_ad1e5709.js","/")
 },{"./controllers/SearchCtrl":1,"./directives/scrolled":2,"./filters/facet":4,"algoliasearch/src/browser/builds/algoliasearch.angular":93,"angular":102,"angular-sanitize":100,"buffer":103,"oMfpAn":108}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";

@@ -7691,11 +7691,15 @@ header {
       text-align: right; }
     .plugins .plugin-card .plugin-updated {
       float: right; }
-    .plugins .plugin-card .plugin-tags .label {
-      margin-right: 0.2em; }
-    .plugins .plugin-card .plugin-tags .label-default {
-      color: #23282d; }
-      .plugins .plugin-card .plugin-tags .label-default em {
+    .plugins .plugin-card .plugin-tags .plugin-tag {
+      margin-right: 0.2em;
+      color: #23282d;
+      display: inline-block;
+      padding: 2px 3px;
+      margin: 0 2px 2px 0;
+      background: #eee;
+      font-size: 0.8em; }
+      .plugins .plugin-card .plugin-tags .plugin-tag em {
         text-decoration: underline; }
   .plugins .facets .facet-value {
     display: block;
