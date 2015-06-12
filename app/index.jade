@@ -86,7 +86,7 @@ html(lang="en" ng-app="myApp")
                     span(ng-bind-html="hit._highlightResult.name.value")
                 p.plugin-desccription(ng-bind-html="hit._highlightResult.short_description.value")
                 .plugin-tags
-                  span.label.label-default(ng-repeat="tag in ::hit._highlightResult.tags" ng-bind-html="tag.value" ng-if="tag.matchLevel !== 'none'")
+                  span.plugin-tag(ng-repeat="tag in ::hit._highlightResult.tags" ng-bind-html="tag.value" ng-if="tag.matchLevel !== 'none'")
               .plugin-author
                 | by #{''}
                 strong(ng-bind-html="hit._highlightResult.author.value")
