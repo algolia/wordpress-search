@@ -4,14 +4,14 @@ var algoliasearchHelper = require('algoliasearch-helper');
 var forEach = require('lodash.foreach');
 var parseInt = require('lodash.parseint');
 
-var SearchCtrl = function($scope, $sce, $timeout, algolia) {
+var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
   $scope.client = algolia.Client('YE0A9ATLJG', '1abceba46dace8485375bc325f0144b5');
   $scope.helper = algoliasearchHelper($scope.client, 'wordpress_plugins', {
     facets: ['tags', 'author'],
     attributesToRetrieve: ['name', 'slug', 'num_ratings', 'downloaded', 'last_updated', 'ratings'],
     attributesToHighlight: ['name', 'short_description', 'author', 'tags']
   });
-  $scope.q = '';
+  $scope.q = $location.search().q || '';
 
   var blurring = null;
   var blurredAt = new Date().getTime();
@@ -23,7 +23,9 @@ var SearchCtrl = function($scope, $sce, $timeout, algolia) {
       blurring = null;
     }
     blurredAt = new Date().getTime();
+
     $scope.content = content;
+    $location.search('q', content.query).replace();
   };
 
   $scope.helper.on('result', function(content) {
@@ -61,7 +63,7 @@ var SearchCtrl = function($scope, $sce, $timeout, algolia) {
     blurring && $timeout.cancel(blurring);
     blurring = $timeout(function() {
       unblur(delayedContent);
-    }, 200);
+    }, 100);
 
     $scope.helper.setQuery(q).search();
   });
