@@ -50,7 +50,7 @@ html(lang="en" ng-app="myApp")
         span.input-group-addon
           i.fa.fa-search
 
-    .container.search-results(ng-cloak ng-if="content")
+    .container.search-results(ng-cloak ng-if="content" force-recompile="blurred")
       .row.plugins(ng-class="{ blur: blurred }")
 
         .col-md-10.col-md-offset-2.col-sm-8.col-sm-offset-4(ng-if="content.nbHits !== 0")
@@ -64,7 +64,7 @@ html(lang="en" ng-app="myApp")
           | No results are matching "<strong>{{ q }}</strong>".
 
         .col-md-2.col-sm-4.facets.hidden-xs
-          .facet(ng-repeat="facet in content.facets")
+          .facet(ng-repeat="facet in ::content.facets")
             h3 {{ facet.name | facetTitle }}
             ul.list-unstyled
               li(ng-repeat="(value, count) in ::facet.data" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
@@ -72,7 +72,7 @@ html(lang="en" ng-app="myApp")
                 a.facet-value(href="#" ng-click="toggleRefine($event, facet.name, value)") {{ value | facetValue : facet.name }}
 
         .col-md-5.col-sm-8(ng-repeat="odd in ::[true, false]" ng-class="{ 'hidden-xs hidden-sm' : !odd }")
-          .plugin-card(ng-repeat="hit in content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd), 'highlighted' : hit.concatenated }")
+          .plugin-card(ng-repeat="hit in ::content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd), 'highlighted' : hit.concatenated }")
             .media.plugin-card-top
               .media-left.plugin-icon
                 a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
@@ -93,7 +93,7 @@ html(lang="en" ng-app="myApp")
             .plugin-card-bottom
               .plugin-updated
                 i.fa.fa-clock-o
-                |  {{  hit.last_updated | date }}
+                |  {{ hit.last_updated | date }}
               .plugin-downloaded
                 i.fa.fa-download
                 |  {{ hit.downloaded | number }}
