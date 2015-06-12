@@ -7662,7 +7662,8 @@ header {
     margin-bottom: 2em; }
     .plugins .plugin-card .plugin-card-top {
       border: 1px solid #dedede;
-      padding: 1.5em; }
+      padding: 1.5em;
+      padding-bottom: 0.5em; }
       .plugins .plugin-card .plugin-card-top .plugin-logo {
         width: 128px;
         height: 128px; }
@@ -7671,6 +7672,21 @@ header {
       border: 1px solid #dedede;
       border-top: 0;
       background: #fafafa; }
+    .plugins .plugin-card .plugin-ratings {
+      padding-top: 0.5em;
+      text-align: center; }
+      .plugins .plugin-card .plugin-ratings .star {
+        color: #E7B900; }
+    .plugins .plugin-card .plugin-author {
+      text-align: right; }
+    .plugins .plugin-card .plugin-updated {
+      float: right; }
+    .plugins .plugin-card .plugin-tags .label {
+      margin-right: 0.2em; }
+    .plugins .plugin-card .plugin-tags .label-default {
+      color: #23282d; }
+      .plugins .plugin-card .plugin-tags .label-default em {
+        text-decoration: underline; }
   .plugins .facets .facet-value {
     display: block;
     border-bottom: 1px dotted #ccc;
