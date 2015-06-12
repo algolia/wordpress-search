@@ -34,7 +34,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
       $scope.content.hits = $scope.content.hits.concat(content.hits);
     }
 
-    if (content) {
+    if (content && content.query) {
       $location.search('q', content.query).replace();
     }
   };
