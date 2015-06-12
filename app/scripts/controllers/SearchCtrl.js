@@ -1,11 +1,15 @@
 "use strict";
 
 var algoliasearchHelper = require('algoliasearch-helper');
+var forEach = require('lodash.foreach');
+var parseInt = require('lodash.parseint');
 
 var SearchCtrl = function($scope, $sce, $timeout, algolia) {
-  $scope.client = algolia.Client('latency', 'f394cda609ddd0db79743b7c5182af09');
+  $scope.client = algolia.Client('YE0A9ATLJG', '1abceba46dace8485375bc325f0144b5');
   $scope.helper = algoliasearchHelper($scope.client, 'wordpress_plugins', {
-    facets: ['tags', 'author']
+    facets: ['tags', 'author'],
+    attributesToRetrieve: ['name', 'slug', 'num_ratings', 'downloaded', 'last_updated', 'ratings'],
+    attributesToHighlight: ['name', 'short_description', 'author', 'tags']
   });
   $scope.q = '';
 
@@ -23,6 +27,25 @@ var SearchCtrl = function($scope, $sce, $timeout, algolia) {
   };
 
   $scope.helper.on('result', function(content) {
+
+    forEach(content.hits, function(hit) {
+      var rating = hit.num_ratings == 0 ? 0 : (parseInt(hit.ratings['1']) +
+        parseInt(hit.ratings['2']) * 2 +
+        parseInt(hit.ratings['3']) * 3 +
+        parseInt(hit.ratings['4']) * 4 +
+        parseInt(hit.ratings['5']) * 5) / hit.num_ratings;
+      hit.stars = [];
+      for (var i = 1; i <= 5; ++i) {
+        if (rating >= i + 0.5) {
+          hit.stars.push(1);
+        } else if (rating < i) {
+          hit.stars.push(0);
+        } else {
+          hit.stars.push(0.5);
+        }
+      }
+    });
+
     $scope.$apply(function() {
       var now = new Date().getTime();
       if (!$scope.blurred || !$scope.q || ($scope.content && $scope.content.hits.length === 0) || blurredAt + 1000 < now) {

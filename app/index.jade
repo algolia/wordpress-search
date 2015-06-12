@@ -67,36 +67,35 @@ html(lang="en" ng-app="myApp")
           .facet(ng-repeat="facet in content.facets")
             h3 {{ facet.name | facetTitle }}
             ul.list-unstyled
-              li(ng-repeat="(value, count) in facet.data" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
+              li(ng-repeat="(value, count) in ::facet.data" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
                 span.facet-count {{ count | number }}
                 a.facet-value(href="#" ng-click="toggleRefine($event, facet.name, value)") {{ value | facetValue : facet.name }}
 
-        .col-md-5.col-sm-8(ng-repeat="odd in [true, false]" ng-class="{ 'hidden-xs hidden-sm' : !odd }")
+        .col-md-5.col-sm-8(ng-repeat="odd in ::[true, false]" ng-class="{ 'hidden-xs hidden-sm' : !odd }")
           .plugin-card(ng-repeat="hit in content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd) }")
             .media.plugin-card-top
               .media-left.plugin-icon
                 a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
                   .plugin-logo.media-object(style="background: #efefef url(//ps.w.org/{{ hit.slug }}/assets/icon-128x128.png) top left no-repeat")
+                .plugin-ratings
+                  i.star.fa(ng-repeat="star in ::hit.stars track by $index" ng-class="{ 'fa-star': (star === 1), 'fa-star-o': (star === 0), 'fa-star-half-full': (star === 0.5) }")
+                  small.text-muted  ({{ hit.num_ratings | number }})
               .media-body
                 h4.plugin-name
                   a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
                     span(ng-bind-html="hit._highlightResult.name.value")
                 p.plugin-desccription(ng-bind-html="hit._highlightResult.short_description.value")
-            .plugin-card-bottom
+                .plugin-tags
+                  span.label.label-default(ng-repeat="tag in ::hit._highlightResult.tags" ng-bind-html="tag.value" ng-if="tag.matchLevel !== 'none'")
               .plugin-author
-                strong Author: #{''}
-                span(ng-bind-html="hit._highlightResult.author.value")
-              .plugin-ratings
-                strong Rated:
-                |  {{ hit.num_ratings | number }}
+                | by #{''}
+                strong(ng-bind-html="hit._highlightResult.author.value")
+            .plugin-card-bottom
               .plugin-updated
-                strong Last Updated:
+                i.fa.fa-clock-o
                 |  {{  hit.last_updated | date }}
               .plugin-downloaded
-                strong Downloaded:
+                i.fa.fa-download
                 |  {{ hit.downloaded | number }}
-              .plugin-tested
-                strong Tested up to:
-                |  {{ hit.tested }}
 
     script(src="js/app.js")
