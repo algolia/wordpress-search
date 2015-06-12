@@ -70,6 +70,17 @@ header
     text-align: center
     margin-top: 2em
 
+@-webkit-keyframes highlight
+  0%
+    background-color: #FFFFE5
+  100%
+    background-color: white
+@-moz-keyframes highlight
+  0%
+    background-color: #FFFFE5
+  100%
+    background-color: white
+
 .plugins
   margin-top: 3em
   opacity: 1;
@@ -80,6 +91,10 @@ header
     opacity: 0.5
   .plugin-card
     margin-bottom: 2em
+    background: white
+    &.highlighted
+      -webkit-animation: highlight 2s 1
+      -moz-animation: highlight 2s 1
     .plugin-card-top
       border: 1px solid $border-color
       padding: 1.5em

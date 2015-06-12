@@ -12,6 +12,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     attributesToHighlight: ['name', 'short_description', 'author', 'tags']
   });
   $scope.q = $location.search().q || '';
+  $scope.page = 0;
 
   var blurring = null;
   var blurredAt = new Date().getTime();
@@ -24,12 +25,21 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     }
     blurredAt = new Date().getTime();
 
-    $scope.content = content;
-    $location.search('q', content.query).replace();
+    if (!content || content.page === 0) {
+      $scope.content = content;
+    } else {
+      forEach(content.hits, function(hit) {
+        hit.concatenated = true;
+      });
+      $scope.content.hits = $scope.content.hits.concat(content.hits);
+    }
+
+    if (content) {
+      $location.search('q', content.query).replace();
+    }
   };
 
   $scope.helper.on('result', function(content) {
-
     forEach(content.hits, function(hit) {
       var rating = hit.num_ratings == 0 ? 0 : (parseInt(hit.ratings['1']) +
         parseInt(hit.ratings['2']) * 2 +
@@ -60,6 +70,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
 
   $scope.$watch('q', function(q) {
     $scope.blurred = true;
+    $scope.page = 0;
     blurring && $timeout.cancel(blurring);
     blurring = $timeout(function() {
       unblur(delayedContent);
@@ -70,11 +81,18 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
 
   $scope.toggleRefine = function($event, facet, value) {
     $event.preventDefault();
+    $scope.helper.state = $scope.helper.state.setPage(0); // FIXME
     $scope.helper.toggleRefine(facet, value).search();
   };
 
   $scope.submit = function() {
     unblur(delayedContent || $scope.content);
+  };
+
+  $scope.loadMore = function() {
+    $scope.page += 1;
+    $scope.helper.state = $scope.helper.state.setPage($scope.page); // FIXME
+    $scope.helper.search();
   };
 };
 

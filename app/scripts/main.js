@@ -6,6 +6,7 @@ require('algoliasearch/src/browser/builds/algoliasearch.angular');
 
 var SearchCtrl = require('./controllers/SearchCtrl');
 var facet = require('./filters/facet');
+var scrolled = require('./directives/scrolled');
 
 var app = angular.module('myApp', ['ngSanitize', 'algoliasearch']);
 
@@ -13,3 +14,5 @@ app.controller('SearchCtrl', ['$scope', '$sce', '$timeout', '$location', 'algoli
 
 app.filter('facetTitle', facet.titleFilter);
 app.filter('facetValue', facet.valueFilter);
+
+app.directive('scrolled', ['$window', '$document', scrolled]);

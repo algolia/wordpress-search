@@ -25,7 +25,7 @@ html(lang="en" ng-app="myApp")
     meta(property="og:image:width" content=600)
     meta(property="og:image:height" content=285)
 
-  body(ng-controller="SearchCtrl")
+  body(ng-controller="SearchCtrl" scrolled="loadMore()")
     header
       a.logo.hidden-xs(href="https://www.algolia.com" taget="_blank")
         img(src="images/logo-algolia.png")
@@ -72,7 +72,7 @@ html(lang="en" ng-app="myApp")
                 a.facet-value(href="#" ng-click="toggleRefine($event, facet.name, value)") {{ value | facetValue : facet.name }}
 
         .col-md-5.col-sm-8(ng-repeat="odd in ::[true, false]" ng-class="{ 'hidden-xs hidden-sm' : !odd }")
-          .plugin-card(ng-repeat="hit in content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd) }")
+          .plugin-card(ng-repeat="hit in content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd), 'highlighted' : hit.concatenated }")
             .media.plugin-card-top
               .media-left.plugin-icon
                 a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
