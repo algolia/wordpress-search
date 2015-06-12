@@ -7648,7 +7648,8 @@ header {
       font-size: 3.5em; }
   header .github-badges {
     text-align: center;
-    margin-top: 2em; }
+    margin-top: 2em;
+    height: 24px; }
 
 @-webkit-keyframes highlight {
   0% {
