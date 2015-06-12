@@ -10,7 +10,7 @@ puts "Initializing..."
 Algolia.init application_id: ENV['APPLICATION_ID'], api_key: ENV['API_KEY']
 index = Algolia::Index.new("#{ENV['INDEX_PREFIX']}plugins_tmp")
 index.set_settings({
-  attributesToIndex: ['unordered(tags)', 'unordered(name)', 'author', 'unordered(short_description)', 'unordered(sections.description)'],
+  attributesToIndex: ['unordered(tags)', 'unordered(name)', 'author', 'unordered(short_description)'],
   customRanking: ['desc(downloaded)'],
   attributesForFaceting: ['author', 'tags']
 })
@@ -41,6 +41,7 @@ Dir.mktmpdir('jsons') do |temp_dir|
         info['author'] = info['author'].gsub(/<[^>]+>/, '') rescue nil
         info['tags'] = info['tags'].values rescue []
         info.delete('compatibility')
+        info.delete('sections')
         info
       rescue
         nil
