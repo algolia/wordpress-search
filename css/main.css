@@ -7650,6 +7650,12 @@ header {
     text-align: center;
     margin-top: 2em; }
 
+@-webkit-keyframes highlight {
+  0% {
+    background-color: #FFFFE5; }
+  100% {
+    background-color: white; } }
+
 .plugins {
   margin-top: 3em;
   opacity: 1;
@@ -7659,7 +7665,11 @@ header {
   .plugins.blur {
     opacity: 0.5; }
   .plugins .plugin-card {
-    margin-bottom: 2em; }
+    margin-bottom: 2em;
+    background: white; }
+    .plugins .plugin-card.highlighted {
+      -webkit-animation: highlight 2s 1;
+      -moz-animation: highlight 2s 1; }
     .plugins .plugin-card .plugin-card-top {
       border: 1px solid #dedede;
       padding: 1.5em;
