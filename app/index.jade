@@ -57,7 +57,7 @@ html(lang="en" ng-app="myApp")
           .stats
             | Found <strong>{{ content.nbHits | number }}</strong> plugin<span ng-if="content.nbHits !== 1">s</span> in <strong>{{ content.processingTimeMS }}</strong>ms,
             |  by
-            a(href="https://www.algolia.com" target="_blank")
+            a(href="http://www.algolia.com/?utm_source=wordpress_plugin_search&utm_medium=link&utm_campaign=search_input" target="_blank")
               img(src="images/logo-algolia.png")
 
         .col-lg-12.no-results(ng-if="content.nbHits === 0")
