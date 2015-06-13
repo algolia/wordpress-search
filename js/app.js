@@ -171,7 +171,7 @@ app.filter('fromNow', ['moment', moment.fromNow]);
 
 app.directive('scrolled', ['$window', '$document', scrolled]);
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_c56ebe42.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_77baf99.js","/")
 },{"./controllers/SearchCtrl":1,"./directives/scrolled":2,"./filters/facet":4,"./filters/moment":5,"algoliasearch/src/browser/builds/algoliasearch.angular":94,"angular":105,"angular-moment":100,"angular-sanitize":103,"buffer":106,"oMfpAn":111}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";

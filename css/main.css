@@ -7621,8 +7621,9 @@ h1, h2, h3, h4, h5, h6 {
 header {
   background: #23282d url("../images/wp-logo.png") 0% -20% no-repeat;
   color: #fafafa;
-  padding-top: 5em;
-  padding-bottom: 3em; }
+  padding-top: 2em;
+  padding-bottom: 1em;
+  position: relative; }
   header h1, header h3 {
     text-align: center;
     margin: 0; }
@@ -7638,7 +7639,7 @@ header {
     top: 10px;
     right: 10px; }
   header .input-group {
-    margin: 2em auto 0 auto;
+    margin: 1em auto 0 auto;
     max-width: 600px; }
     header .input-group input {
       height: 2.5em;
@@ -7647,8 +7648,11 @@ header {
     header .input-group .input-group-addon {
       font-size: 3.5em; }
   header .github-badges {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
     text-align: center;
-    margin-top: 2em;
+    margin-top: 1em;
     height: 24px; }
 
 @-webkit-keyframes highlight {
@@ -7681,7 +7685,7 @@ header {
         width: 128px;
         height: 128px; }
     .plugins .plugin-card .plugin-card-bottom {
-      padding: 1.5em;
+      padding: 0.5em 1.5em;
       border: 1px solid #dedede;
       border-top: 0;
       background: #fafafa; }
