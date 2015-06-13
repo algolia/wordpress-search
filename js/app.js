@@ -87,7 +87,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
 
     $scope.$apply(function() {
       var now = new Date().getTime();
-      if (!$scope.blurred || !$scope.q || ($scope.content && $scope.content.hits.length === 0) || blurredAt + 1000 < now) {
+      if (!$scope.blurred || !$scope.q || ($scope.content && $scope.content.hits.length === 0) || blurredAt + 1500 < now) {
         unblur(content);
       } else {
         delayedContent = content;
@@ -101,7 +101,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     blurring && $timeout.cancel(blurring);
     blurring = $timeout(function() {
       unblur(delayedContent);
-    }, 100);
+    }, 200);
 
     $scope.helper.setQuery(q).search();
   });
@@ -171,7 +171,7 @@ app.filter('fromNow', ['moment', moment.fromNow]);
 
 app.directive('scrolled', ['$window', '$document', scrolled]);
 
-}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_77baf99.js","/")
+}).call(this,require("oMfpAn"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_be88317c.js","/")
 },{"./controllers/SearchCtrl":1,"./directives/scrolled":2,"./filters/facet":4,"./filters/moment":5,"algoliasearch/src/browser/builds/algoliasearch.angular":94,"angular":105,"angular-moment":100,"angular-sanitize":103,"buffer":106,"oMfpAn":111}],4:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 "use strict";
