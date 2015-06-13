@@ -5,6 +5,7 @@ var titleFilter = function() {
     switch (name) {
       case "author": return "Author";
       case "tags": return "Tags";
+      case "rating": return "Ratings";
       default: return "N/A";
     }
   };

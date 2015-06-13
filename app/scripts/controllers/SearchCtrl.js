@@ -2,13 +2,13 @@
 
 var algoliasearchHelper = require('algoliasearch-helper');
 var forEach = require('lodash.foreach');
-var parseInt = require('lodash.parseint');
 
 var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
   $scope.client = algolia.Client('YE0A9ATLJG', '1abceba46dace8485375bc325f0144b5');
   $scope.helper = algoliasearchHelper($scope.client, 'wordpress_plugins', {
     facets: ['tags', 'author'],
-    attributesToRetrieve: ['name', 'slug', 'num_ratings', 'downloaded', 'last_updated', 'ratings'],
+    disjunctiveFacets: ['rating'],
+    attributesToRetrieve: ['name', 'slug', 'rating', 'num_ratings', 'downloaded', 'last_updated', 'ratings'],
     attributesToHighlight: ['name', 'short_description', 'author', 'tags']
   });
   $scope.q = $location.search().q || '';
@@ -40,23 +40,48 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
   };
 
   $scope.helper.on('result', function(content) {
+    content.ratingFacet = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0
+    };
+
     forEach(content.hits, function(hit) {
-      var rating = hit.num_ratings == 0 ? 0 : (parseInt(hit.ratings['1']) +
-        parseInt(hit.ratings['2']) * 2 +
-        parseInt(hit.ratings['3']) * 3 +
-        parseInt(hit.ratings['4']) * 4 +
-        parseInt(hit.ratings['5']) * 5) / hit.num_ratings;
+      var rating = hit.rating;
       hit.stars = [];
       for (var i = 1; i <= 5; ++i) {
-        if (rating >= i + 0.5) {
-          hit.stars.push(1);
-        } else if (rating < i) {
-          hit.stars.push(0);
+        if (rating >= i) {
+          hit.stars.push(true);
         } else {
-          hit.stars.push(0.5);
+          hit.stars.push(false);
         }
       }
     });
+
+    forEach(content.disjunctiveFacets, function(facet) {
+      if (facet.name === 'rating') {
+        forEach(facet.data, function(count, value) {
+          var rating = +value;
+          if (rating < 1) {
+            // skip
+          } else if (rating < 2) {
+            content.ratingFacet[1] += count;
+          } else if (rating < 3) {
+            content.ratingFacet[2] += count;
+          } else if (rating < 4) {
+            content.ratingFacet[3] += count;
+          } else if (rating < 5) {
+            content.ratingFacet[4] += count;
+          } else {
+            content.ratingFacet[5] += count;
+          }
+        });
+        content.facets = [content.facets[0], facet].concat(content.facets.slice(1));
+      }
+    });
+
 
     $scope.$apply(function() {
       var now = new Date().getTime();
@@ -93,6 +118,10 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     $scope.page += 1;
     $scope.helper.state = $scope.helper.state.setPage($scope.page); // FIXME
     $scope.helper.search();
+  };
+
+  $scope.range = function(v) {
+    return new Array(v);
   };
 };
 

@@ -88,6 +88,8 @@ header
   transition: opacity .05s ease-in-out;
   -moz-transition: opacity .05s ease-in-out;
   -webkit-transition: opacity .05s ease-in-out;
+  .star
+    color: #E7B900
   &.blur
     opacity: 0.5
   .plugin-card
@@ -111,8 +113,6 @@ header
     .plugin-ratings
       padding-top: 0.5em
       text-align: center
-      .star
-        color: #E7B900
     .plugin-author
       text-align: right
     .plugin-updated
@@ -134,6 +134,11 @@ header
       display: block
       border-bottom: 1px dotted $text-muted
       padding: 3px 3px
+      &[disabled]
+        cursor: default
+    .facet-rating
+      a:hover
+        text-decoration: none
     .facet-count
       display: block
       float: right

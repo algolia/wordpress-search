@@ -66,10 +66,17 @@ html(lang="en" ng-app="myApp")
         .col-md-2.col-sm-4.facets.hidden-xs
           .facet(ng-repeat="facet in content.facets")
             h3 {{ facet.name | facetTitle }}
-            ul.list-unstyled
+            ul.list-unstyled(ng-if="facet.name !== 'rating'")
               li(ng-repeat="(value, count) in ::facet.data" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
                 span.facet-count {{ count | number }}
                 a.facet-value(href="#" ng-click="toggleRefine($event, facet.name, value)") {{ value | facetValue : facet.name }}
+            ul.list-unstyled.facet-rating(ng-if="facet.name === 'rating'")
+              li(ng-repeat="(value, count) in content.ratingFacet" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
+                span.facet-count {{ count | number }}
+                a.facet-value(href="#" ng-click="count ? toggleRefine($event, facet.name, value) : 0", ng-disabled="!count")
+                  i.fa.fa-star(ng-repeat="i in range(+value) track by $index" ng-class="{ star: count, 'text-muted': !count }")
+                  i.fa.fa-star-o(ng-repeat="i in range(5 - value) track by $index" ng-class="{ star: count, 'text-muted': !count }")
+                  | &nbsp;
 
         .col-md-5.col-sm-8(ng-repeat="odd in ::[true, false]" ng-class="{ 'hidden-xs hidden-sm' : !odd }")
           .plugin-card(ng-repeat="hit in content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd), 'highlighted' : hit.concatenated }")
@@ -78,7 +85,7 @@ html(lang="en" ng-app="myApp")
                 a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
                   .plugin-logo.media-object(style="background: #efefef url(//ps.w.org/{{ hit.slug }}/assets/icon-128x128.png) top left no-repeat")
                 .plugin-ratings
-                  i.star.fa(ng-repeat="star in ::hit.stars track by $index" ng-class="{ 'fa-star': (star === 1), 'fa-star-o': (star === 0), 'fa-star-half-full': (star === 0.5) }")
+                  i.star.fa(ng-repeat="star in ::hit.stars track by $index" ng-class="{ 'fa-star': star, 'fa-star-o': !star }")
                   small.text-muted  ({{ hit.num_ratings | number }})
               .media-body
                 h4.plugin-name
