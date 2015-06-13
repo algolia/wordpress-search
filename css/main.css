@@ -7663,6 +7663,8 @@ header {
   transition: opacity 0.05s ease-in-out;
   -moz-transition: opacity 0.05s ease-in-out;
   -webkit-transition: opacity 0.05s ease-in-out; }
+  .plugins .star {
+    color: #E7B900; }
   .plugins.blur {
     opacity: 0.5; }
   .plugins .plugin-card {
@@ -7686,8 +7688,6 @@ header {
     .plugins .plugin-card .plugin-ratings {
       padding-top: 0.5em;
       text-align: center; }
-      .plugins .plugin-card .plugin-ratings .star {
-        color: #E7B900; }
     .plugins .plugin-card .plugin-author {
       text-align: right; }
     .plugins .plugin-card .plugin-updated {
@@ -7706,6 +7706,10 @@ header {
     display: block;
     border-bottom: 1px dotted #ccc;
     padding: 3px 3px; }
+    .plugins .facets .facet-value[disabled] {
+      cursor: default; }
+  .plugins .facets .facet-rating a:hover {
+    text-decoration: none; }
   .plugins .facets .facet-count {
     display: block;
     float: right;
