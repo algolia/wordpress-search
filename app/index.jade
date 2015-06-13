@@ -92,10 +92,10 @@ html(lang="en" ng-app="myApp")
                 strong(ng-bind-html="hit._highlightResult.author.value")
             .plugin-card-bottom
               .plugin-updated
-                i.fa.fa-clock-o
-                |  {{  hit.last_updated | date }}
+                i.fa.fa-clock-o(title="Updated at")
+                |  {{  hit.last_updated | fromNow }}
               .plugin-downloaded
-                i.fa.fa-download
+                i.fa.fa-download(title="Downloaded")
                 |  {{ hit.downloaded | number }}
 
     script(src="js/app.js")
