@@ -8,7 +8,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
   $scope.helper = algoliasearchHelper($scope.client, 'wordpress_plugins', {
     facets: ['tags', 'author'],
     disjunctiveFacets: ['rating'],
-    attributesToRetrieve: ['name', 'slug', 'rating', 'num_ratings', 'downloaded', 'last_updated', 'ratings'],
+    attributesToRetrieve: ['name', 'slug', 'rating', 'num_ratings', 'downloaded', 'last_updated', 'ratings', 'author_profile'],
     attributesToHighlight: ['name', 'short_description', 'author', 'tags']
   });
   $scope.q = $location.search().q || '';

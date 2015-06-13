@@ -96,7 +96,8 @@ html(lang="en" ng-app="myApp")
                   span.plugin-tag(ng-repeat="tag in ::hit._highlightResult.tags" ng-bind-html="tag.value" ng-if="tag.matchLevel !== 'none'")
               .plugin-author
                 | by #{''}
-                strong(ng-bind-html="hit._highlightResult.author.value")
+                a(href="https:{{ hit.author_profile }}")
+                  strong(ng-bind-html="hit._highlightResult.author.value")
             .plugin-card-bottom
               .plugin-updated
                 i.fa.fa-clock-o(title="Updated at")
