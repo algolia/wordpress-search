@@ -85,7 +85,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
 
     $scope.$apply(function() {
       var now = new Date().getTime();
-      if (!$scope.blurred || !$scope.q || ($scope.content && $scope.content.hits.length === 0) || blurredAt + 1000 < now) {
+      if (!$scope.blurred || !$scope.q || ($scope.content && $scope.content.hits.length === 0) || blurredAt + 1500 < now) {
         unblur(content);
       } else {
         delayedContent = content;
@@ -99,7 +99,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     blurring && $timeout.cancel(blurring);
     blurring = $timeout(function() {
       unblur(delayedContent);
-    }, 100);
+    }, 200);
 
     $scope.helper.setQuery(q).search();
   });
