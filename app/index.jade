@@ -37,6 +37,11 @@ html(lang="en" ng-app="myApp")
       h1= title
       h3 A Unique Search Experience propulsed by Algolia
 
+      .input-group
+        input.form-control(type="search" ng-model="q" placeholder="Search by name, description & tags..." ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 50, 'blur': 0 } }" ng-keyup="$event.keyCode == 13 && submit()" autofocus)
+        span.input-group-addon
+          i.fa.fa-search
+
       .github-badges.hidden-xs.hidden-sm
         span.share-twitter
           <a href="https://twitter.com/share" class="twitter-share-button" data-via="aloglia">Tweet</a>
@@ -44,11 +49,6 @@ html(lang="en" ng-app="myApp")
         span.follow-twitter
           <a href="https://twitter.com/algolia" class="twitter-follow-button" data-show-count="false">Follow @algolia</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-      .input-group
-        input.form-control(type="search" ng-model="q" placeholder="Search by name, description & tags..." ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 50, 'blur': 0 } }" ng-keyup="$event.keyCode == 13 && submit()" autofocus)
-        span.input-group-addon
-          i.fa.fa-search
 
     .container.search-results(ng-cloak ng-if="content")
       .row.plugins(ng-class="{ blur: blurred }")
@@ -106,4 +106,11 @@ html(lang="en" ng-app="myApp")
                 i.fa.fa-download(title="Downloaded")
                 |  {{ hit.downloaded | number }}
 
-    script(src="js/app.js")
+    script(type='text/javascript' src="js/app.js")
+    script(type='text/javascript').
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-32446386-6', 'auto');
+      ga('send', 'pageview');
