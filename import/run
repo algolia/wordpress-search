@@ -12,7 +12,7 @@ index = Algolia::Index.new("#{ENV['INDEX_PREFIX']}plugins_tmp")
 index.set_settings({
   attributesToIndex: ['unordered(name)', 'unordered(tags)', 'author', 'unordered(short_description)'],
   customRanking: ['desc(downloaded)'],
-  attributesForFaceting: ['author', 'tags']
+  attributesForFaceting: ['author', 'tags', 'rating']
 })
 
 puts "Listing..."
