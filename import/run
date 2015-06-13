@@ -40,6 +40,7 @@ Dir.mktmpdir('jsons') do |temp_dir|
       begin
         info['author'] = info['author'].gsub(/<[^>]+>/, '') rescue nil
         info['tags'] = info['tags'].values rescue []
+        info['rating'] = (info['rating'] / 20.0).round
         info.delete('compatibility')
         info.delete('sections')
         info
