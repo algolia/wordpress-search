@@ -9,7 +9,9 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     facets: ['tags', 'author'],
     disjunctiveFacets: ['rating'],
     attributesToRetrieve: ['name', 'slug', 'rating', 'num_ratings', 'downloaded', 'last_updated', 'ratings', 'author_profile'],
-    attributesToHighlight: ['name', 'short_description', 'author', 'tags']
+    attributesToHighlight: ['name', 'short_description', 'author', 'tags'],
+    maxValuesPerFacet: 10,
+    distinct: false
   });
   $scope.q = $location.search().q || '';
   $scope.page = 0;
@@ -106,8 +108,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
 
   $scope.toggleRefine = function($event, facet, value) {
     $event.preventDefault();
-    $scope.helper.state = $scope.helper.state.setPage(0); // FIXME
-    $scope.helper.toggleRefine(facet, value).search();
+    $scope.helper.setCurrentPage(0).toggleRefine(facet, value).search();
   };
 
   $scope.submit = function() {
@@ -116,8 +117,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
 
   $scope.loadMore = function() {
     $scope.page += 1;
-    $scope.helper.state = $scope.helper.state.setPage($scope.page); // FIXME
-    $scope.helper.search();
+    $scope.helper.setCurrentPage($scope.page).search();
   };
 
   $scope.range = function(v) {
