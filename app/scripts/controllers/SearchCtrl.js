@@ -10,8 +10,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     disjunctiveFacets: ['rating'],
     attributesToRetrieve: ['name', 'slug', 'rating', 'num_ratings', 'downloaded', 'last_updated', 'ratings', 'author_profile'],
     attributesToHighlight: ['name', 'short_description', 'author', 'tags'],
-    maxValuesPerFacet: 10,
-    distinct: false
+    maxValuesPerFacet: 10
   });
   $scope.q = $location.search().q || '';
   $scope.page = 0;
