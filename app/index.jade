@@ -70,13 +70,14 @@ html(lang="en" ng-app="myApp")
               li(ng-repeat="(value, count) in ::facet.data" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
                 span.facet-count {{ count | number }}
                 a.facet-value(href="#" ng-click="toggleRefine($event, facet.name, value)") {{ value | facetValue : facet.name }}
-            ul.list-unstyled.facet-rating(ng-if="facet.name === 'rating'")
-              li(ng-repeat="(value, count) in content.ratingFacet" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
-                span.facet-count {{ count | number }}
-                a.facet-value(href="#" ng-click="count ? toggleRefine($event, facet.name, value) : 0", ng-disabled="!count")
-                  i.fa.fa-star(ng-repeat="i in range(+value) track by $index" ng-class="{ star: count, 'text-muted': !count }")
-                  i.fa.fa-star-o(ng-repeat="i in range(5 - value) track by $index" ng-class="{ star: count, 'text-muted': !count }")
-                  | &nbsp;
+            table.table.facet-rating(ng-if="facet.name === 'rating'")
+              tr(ng-repeat="(value, count) in content.ratingFacet" ng-class="{ refined: (helper.isRefined(facet.name, value)) }")
+                td
+                  a(href="#" ng-click="count ? toggleRefine($event, facet.name, value) : 0", ng-disabled="!count")
+                    i.fa.fa-star(ng-repeat="i in range(+value) track by $index" ng-class="{ star: count, 'text-muted': !count }")
+                    i.fa.fa-star-o(ng-repeat="i in range(5 - value) track by $index" ng-class="{ star: count, 'text-muted': !count }")
+                    | &nbsp;
+                td.facet-count {{ count | number }}
 
         .col-md-5.col-sm-8(ng-repeat="odd in ::[true, false]" ng-class="{ 'hidden-xs hidden-sm' : !odd }")
           .plugin-card(ng-repeat="hit in content.hits track by hit.objectID" ng-class="{ 'hidden-md hidden-lg' : ($odd == odd), 'highlighted' : hit.concatenated }")

@@ -144,11 +144,26 @@ header
       a:hover
         text-decoration: none
     .facet-count
-      display: block
-      float: right
       color: $text-muted
       font-size: 0.8em
+    span.facet-count
+      display: block
+      float: right
       line-height: 1.7em
+    .facet-rating
+      font-size: 1em
+      td
+        border-top: none
+        border-bottom: 1px dotted $text-muted
+        padding: 2px !important
+    td.facet-count
+      text-align: right
+    tr.refined
+      td
+        border: 1px solid $border-color
+      td.facet-count
+        background: $gray-light
+        color: $gray
     li.refined
       .facet-value
         background: $gray-lighter
