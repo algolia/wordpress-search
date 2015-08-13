@@ -84,7 +84,7 @@ html(lang="en" ng-app="myApp")
             .media.plugin-card-top
               .media-left.plugin-icon
                 a(href="https://wordpress.org/plugins/{{ hit.slug }}/")
-                  .plugin-logo.media-object(style="background: #efefef url(//ps.w.org/{{ hit.slug }}/assets/icon-128x128.png) top left no-repeat")
+                  .plugin-logo.media-object(style="background: url(//ps.w.org/{{ hit.slug }}/assets/icon-256x256.png) top left no-repeat, url(//ps.w.org/{{ hit.slug }}/assets/icon-128x128.png) top left no-repeat, url(//ps.w.org/{{ hit.slug }}/assets/icon-256x256.jpg) top left no-repeat, url(//ps.w.org/{{ hit.slug }}/assets/icon-128x128.jpg) top left no-repeat, #efefef; background-size: 100% auto")
                 .plugin-ratings
                   i.star.fa(ng-repeat="star in ::hit.stars track by $index" ng-class="{ 'fa-star': star, 'fa-star-o': !star }")
                   small.text-muted  ({{ hit.num_ratings | number }})

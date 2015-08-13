@@ -100,7 +100,7 @@ var SearchCtrl = function($scope, $sce, $timeout, $location, algolia) {
     blurring && $timeout.cancel(blurring);
     blurring = $timeout(function() {
       unblur(delayedContent);
-    }, 200);
+    }, 50);
 
     $scope.helper.setQuery(q).search();
   });
