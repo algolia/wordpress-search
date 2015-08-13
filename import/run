@@ -12,7 +12,8 @@ index = Algolia::Index.new("#{ENV['INDEX_PREFIX']}plugins_tmp")
 index.set_settings({
   attributesToIndex: ['unordered(name)', 'unordered(tags)', 'author', 'unordered(short_description)'],
   customRanking: ['desc(downloaded)'],
-  attributesForFaceting: ['author', 'tags', 'rating']
+  attributesForFaceting: ['author', 'tags', 'rating'],
+  ranking: ['desc(popular)', 'typo', 'words', 'proximity', 'attribute', 'exact', 'custom']
 })
 
 puts "Listing..."
@@ -41,6 +42,7 @@ Dir.mktmpdir('jsons') do |temp_dir|
         info['author'] = info['author'].gsub(/<[^>]+>/, '') rescue nil
         info['tags'] = info['tags'].values rescue []
         info['rating'] = (info['rating'] / 20.0).round
+        info['popular'] = info['downloaded'].to_i > 10000
         info.delete('compatibility')
         info.delete('sections')
         info
