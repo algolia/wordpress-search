@@ -7715,11 +7715,25 @@ header {
   .plugins .facets .facet-rating a:hover {
     text-decoration: none; }
   .plugins .facets .facet-count {
+    color: #ccc;
+    font-size: 0.8em; }
+  .plugins .facets span.facet-count {
     display: block;
     float: right;
-    color: #ccc;
-    font-size: 0.8em;
     line-height: 1.7em; }
+  .plugins .facets .facet-rating {
+    font-size: 1em; }
+    .plugins .facets .facet-rating td {
+      border-top: none;
+      border-bottom: 1px dotted #ccc;
+      padding: 2px !important; }
+  .plugins .facets td.facet-count {
+    text-align: right; }
+  .plugins .facets tr.refined td {
+    border: 1px solid #dedede; }
+  .plugins .facets tr.refined td.facet-count {
+    background: #eee;
+    color: #666; }
   .plugins .facets li.refined .facet-value {
     background: #fafafa;
     border: 1px solid #dedede;
