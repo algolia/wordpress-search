@@ -38,9 +38,9 @@ html(lang="en" ng-app="myApp")
       h3 A Unique Search Experience propulsed by Algolia
 
       .input-group
-        input.form-control(type="search" ng-model="q" placeholder="Search by name, description & tags..." ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 50, 'blur': 0 } }" ng-keyup="$event.keyCode == 13 && submit()" autofocus)
         span.input-group-addon
           i.fa.fa-search
+        input.form-control(type="search" ng-model="q" placeholder="Search by name, description & tags..." ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 50, 'blur': 0 } }" ng-keyup="$event.keyCode == 13 && submit()" autofocus)
 
       .github-badges.hidden-xs.hidden-sm
         span.share-twitter

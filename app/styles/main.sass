@@ -60,12 +60,22 @@ header
   .input-group
     margin: 1em auto 0 auto
     max-width: 600px
+    padding-top: 2em
     input
-      height: 2.5em
-      font-size: 2em
+      font-size: 1.5em
       font-weight: $font-weight-light
+      background: transparent
+      border: none
+      border-bottom: 2px solid white
+      &:focus
+        border-bottom: 2px solid white
     .input-group-addon
-      font-size: 3.5em
+      font-size: 1.5em
+      background: transparent
+      border: none
+      padding: 0
+      border-bottom: 2px solid white
+      color: white
 
   .github-badges
     position: absolute
