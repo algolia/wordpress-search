@@ -1,10 +1,12 @@
 # Wordpress Plugins Search
 
-This is the repository of the [wordpress.algolia.com](https://wordpress.algolia.com/) website. It's a simple [Angular.js](https://angularjs.org/) app using the [AlgoliaSearch API client](http://github.com/algolia/algoliasearch-client-js) to power the search.
+This is the repository backing the [wordpress.algolia.com](https://wordpress.algolia.com/) website. It's an [Angular.js](https://angularjs.org/) app using the [AlgoliaSearch API client](http://github.com/algolia/algoliasearch-client-js) to power the search feature.
+
+The search results are refreshed as you type, querying the Algolia API at each keystroke.
 
 ## Indexing
 
-The records are crawled with a simple [Ruby+Shell script](https://github.com/algolia/wordpress-search/blob/master/import/run) and are formatted as follow:
+The Wordpress Plugins are crawled with a simple [Ruby+Shell script](https://github.com/algolia/wordpress-search/blob/master/import/run) and are formatted as follow in Algolia:
 
 ```js
 {
@@ -12,6 +14,7 @@ The records are crawled with a simple [Ruby+Shell script](https://github.com/alg
   "name": "Akismet",
   "slug": "akismet",
   "version": "3.1.3",
+  "popular": true,
   "author": "Automattic",
   "author_profile": "//profiles.wordpress.org/matt",
   "contributors": {
@@ -31,19 +34,18 @@ The records are crawled with a simple [Ruby+Shell script](https://github.com/alg
   "short_description": "Akismet checks your comments against the Akismet Web service to see if they look like spam or not.",
   "download_link": "https://downloads.wordpress.org/plugin/akismet.3.1.3.zip",
   "tags": [ "Akismet", "anti-spam", "antispam", "comment moderation", "comment spam", "comments", "contact form spam", "spam", "spam comments" ],
-  "donate_link": "",
-  "popular": true
+  "donate_link": ""
 }
 ```
 
 The Algolia index is configured with the following settings:
 
-```ruby
+```js
 {
-  attributesToIndex: ['unordered(name)', 'unordered(tags)', 'author', 'unordered(short_description)'],
-  customRanking: ['desc(downloaded)'],
-  attributesForFaceting: ['author', 'tags', 'rating'],
-  ranking: ['desc(popular)', 'typo', 'words', 'proximity', 'attribute', 'exact', 'custom']
+  "attributesToIndex": ['unordered(name)', 'unordered(tags)', 'author', 'unordered(short_description)'],
+  "customRanking": ['desc(downloaded)'],
+  "attributesForFaceting": ['author', 'tags', 'rating'],
+  "ranking": ['desc(popular)', 'typo', 'words', 'proximity', 'attribute', 'exact', 'custom']
 }
 ```
 
