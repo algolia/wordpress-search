@@ -7640,13 +7640,23 @@ header {
     right: 10px; }
   header .input-group {
     margin: 1em auto 0 auto;
-    max-width: 600px; }
+    max-width: 600px;
+    padding-top: 2em; }
     header .input-group input {
-      height: 2.5em;
-      font-size: 2em;
-      font-weight: 300; }
+      font-size: 1.5em;
+      font-weight: 300;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid white; }
+      header .input-group input:focus {
+        border-bottom: 2px solid white; }
     header .input-group .input-group-addon {
-      font-size: 3.5em; }
+      font-size: 1.5em;
+      background: transparent;
+      border: none;
+      padding: 0;
+      border-bottom: 2px solid white;
+      color: white; }
   header .github-badges {
     position: absolute;
     bottom: 10px;
