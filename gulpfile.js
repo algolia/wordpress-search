@@ -33,7 +33,7 @@ server.all('/*', function(req, res) {
 });
 
 // Dev task
-gulp.task('build', ['bower', 'icons', 'templates', 'images', 'styles', 'lint', 'browserify'], function() { });
+gulp.task('build', ['bower', 'icons', 'templates', 'images', 'static', 'styles', 'lint', 'browserify'], function() { });
 
 // JSHint task
 gulp.task('lint', function() {
@@ -53,6 +53,12 @@ gulp.task('templates', function() {
 gulp.task('images', function() {
   gulp.src('app/images/**/*.*')
     .pipe(gulp.dest('dist/images'))
+});
+
+// static
+gulp.task('static', function() {
+  gulp.src('static/*.*')
+    .pipe(gulp.dest('dist/'))
 });
 
 // bower
