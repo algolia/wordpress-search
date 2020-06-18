@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "algoliasearch-helper": "~2.1.0",
-    "angular": "~1.4.0",
+    "angular": "~1.8.0",
     "angular-moment": "^0.10.1",
     "angular-sanitize": "^1.4.0",
     "browserify": "~10.2.3",
