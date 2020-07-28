@@ -5,7 +5,7 @@ GEM
       httpclient (~> 2.8.3)
       json (>= 1.5.1)
     httpclient (2.8.3)
-    json (2.1.0)
+    json (2.3.1)
 
 PLATFORMS
   ruby
